@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { SignedIn, SignUpButton, UserButton } from "@clerk/nextjs";
+import { SignedIn, SignUpButton } from "@clerk/nextjs";
 import {
   ClerkLoaded,
   ClerkLoading,
@@ -12,7 +12,8 @@ import Image from "next/image";
 
 //(marketing) -wrapping  route in parenthesis so that path doesn't show in url
 export default function Home() {
-  const signInForceRedirectUrl = process.env.NEXT_PUBLIC_CLERK_SIGN_IN_FORCE_REDIRECT_URL;
+  const signInForceRedirectUrl =
+    process.env.NEXT_PUBLIC_CLERK_SIGN_IN_FORCE_REDIRECT_URL;
   const signUpForceRedirectUrl =
     process.env.NEXT_PUBLIC_CLERK_SIGN_UP_FORCE_REDIRECT_URL;
   console.log("signInForceRedirectUrl", signInForceRedirectUrl);
@@ -26,36 +27,41 @@ export default function Home() {
         <h1 className="text-xl  lg:text-3xl font-bold text-neutral-600 max-w-[15rem] text-center">
           Learn, practice and master new languages with Learn Lingo
         </h1>
-      </div>
-      <div>
-        <ClerkLoading>
-          <Loader className="w-5 h-5 text-muted-foreground animate-spin" />
-        </ClerkLoading>
-        <ClerkLoaded>
-          <SignedOut>
-            <SignUpButton
-              mode="modal"
-              forceRedirectUrl={signUpForceRedirectUrl}
-            >
-              <Button size={"lg"} variant={"secondary"} className="w-full">
-                Get Started
+
+        <div className="flex flex-col items-center gap-y-3 max-w-[20.625rem] w-full">
+          <ClerkLoading>
+            <Loader className="w-5 h-5 text-muted-foreground animate-spin" />
+          </ClerkLoading>
+          <ClerkLoaded>
+            <SignedOut>
+              <SignUpButton
+                mode="modal"
+                forceRedirectUrl={signUpForceRedirectUrl}
+              >
+                <Button size={"lg"} variant={"secondary"} className="w-full">
+                  Get Started
+                </Button>
+              </SignUpButton>
+              <SignInButton
+                mode="modal"
+                forceRedirectUrl={signInForceRedirectUrl}
+              >
+                <Button
+                  size={"lg"}
+                  variant={"primaryOutline"}
+                  className="w-full"
+                >
+                  I already have an account
+                </Button>
+              </SignInButton>
+            </SignedOut>
+            <SignedIn>
+              <Button size="lg" variant="secondary" className="w-full" asChild>
+                <Link href="/learn">Continue learning</Link>
               </Button>
-            </SignUpButton>
-            <SignInButton
-              mode="modal"
-              forceRedirectUrl={signInForceRedirectUrl}
-            >
-              <Button size={"lg"} variant={"primaryOutline"} className="w-full">
-                I already have an account
-              </Button>
-            </SignInButton>
-          </SignedOut>
-          <SignedIn>
-            <Button size="lg" variant="secondary" className="w-full" asChild>
-              <Link href="/learn">Continue learning</Link>
-            </Button>
-          </SignedIn>
-        </ClerkLoaded>
+            </SignedIn>
+          </ClerkLoaded>
+        </div>
       </div>
     </div>
   );
