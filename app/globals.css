@@ -6,6 +6,13 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+/* apply height full to pages */
+html,
+body,
+:root {
+  @apply h-full;
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;
