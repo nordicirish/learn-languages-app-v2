@@ -1,3 +1,3 @@
 export default function Learn() {
-  return <div>Learn</div>;
+  return <div>Learn Page</div>;
 };
